@@ -3,7 +3,6 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 class LlamaModel:
     model_id = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-    # Load tokenizer and model
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
@@ -49,10 +48,7 @@ class LlamaModel:
 
         decoded = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-        # Split based on the <|assistant|> tag
         parts = decoded.split("<|assistant|>")
-
-        # The last non-empty string after the last <|assistant|> should be the model's final response
         image_prompt = parts[-1].strip()
 
         self.messages.append({"role": "assistant", "content": image_prompt})
@@ -75,8 +71,3 @@ class LlamaModel:
 
 
         return image_prompt, caption
-    
-# model = LlamaModel()
-# prompt, caption = model.getImagePrompt()
-# print("prompt:", prompt)
-# print("caption:", caption)

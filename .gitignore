@@ -3,3 +3,5 @@ sd-v1-4-diffusers/
 sd-v1-4.ckpt
 venv/
 .env
+outputs/
+__pycache__/
