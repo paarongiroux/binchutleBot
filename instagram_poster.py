@@ -6,7 +6,7 @@ import time
 
 
 
-def makeInstagramPost(username, password, imagePath, caption):
+def make_instagram_post(username, password, imagePath, caption):
     options = uc.ChromeOptions()
     options.add_argument("--disable-notifications")
 

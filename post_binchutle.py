@@ -1,8 +1,8 @@
 from llama import LlamaModel
-from imageGen import ImageGenerator
+from image_gen import ImageGenerator
 from aws_uploader import BucketUploader
 from csv_logger import log_image_to_csv
-from instagram_poster import makeInstagramPost
+from instagram_poster import make_instagram_post
 from dotenv import load_dotenv
 import os
 from pathlib import Path
@@ -18,7 +18,7 @@ region = os.getenv("AWS_REGION", "us-west-2")
 
 
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-outputFile = f"outputs/output-{timestamp}.png"
+output_file = f"outputs/output-{timestamp}.png"
 
 llmModel = LlamaModel()
 print("Generating image prompt...")
@@ -26,14 +26,14 @@ prompt, caption = llmModel.getImagePrompt()
 
 generator = ImageGenerator()
 print("Generating image...")
-generator.generate(prompt, outputFile)
+generator.generate(prompt, output_file)
 
 script_dir = Path(__file__).parent.resolve()
-image_path = script_dir / outputFile
+image_path = script_dir / output_file
 
-bucketUploader = BucketUploader("binchutlebot", access_key, secret_key, region)
+bucket_uploader = BucketUploader("binchutlebot", access_key, secret_key, region)
 print("Uploading to S3 bucket...")
-s3_url = bucketUploader.upload_image(outputFile)
+s3_url = bucket_uploader.upload_image(output_file)
 
 print("\n\nSUMMARY==================")
 print(" - PROMPT: ", prompt)
@@ -43,4 +43,4 @@ print(" - URL:    ", s3_url)
 
 log_image_to_csv(prompt, caption, s3_url)
 print("\nPosting to instagram...")
-makeInstagramPost(username, password, str(image_path), caption)
+make_instagram_post(username, password, str(image_path), caption)
