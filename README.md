@@ -21,12 +21,12 @@ Python script to generate an image based on an AI prompt and post it to instagra
   - upload the file to my s3 bucket
 
 ### `csv_logger.py`
-  - save the prompt, caption and s3 url into a `image_log.csv`
+  - save the prompt, caption and s3 url into `image_log.csv`
 
 # Example output:
 <img src="https://binchutlebot.s3.us-east-2.amazonaws.com/output-20250522-082309.png" alt="carrot man example"/>
 
-__promp__: A man with a pet beetle tries to catch a fish with a fishhook made from a carrot, but it keeps slipping out.
+__prompt__: A man with a pet beetle tries to catch a fish with a fishhook made from a carrot, but it keeps slipping out.
 
 __caption__: The man with the beetle hook tries to catch a fish with a fishhook made from a carrot, but it keeps slipping out.
 
